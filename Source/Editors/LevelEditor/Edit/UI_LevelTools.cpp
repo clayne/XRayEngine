@@ -306,6 +306,7 @@ void CLevelTool::RealUpdateProperties()
 		m_Props->AssignItems		(items);
     }
 	m_Flags.set(flUpdateProperties,FALSE);
+    m_Props->setModified(FALSE);
 }
 //---------------------------------------------------------------------------
 
