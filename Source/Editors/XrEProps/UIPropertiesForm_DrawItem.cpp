@@ -546,6 +546,11 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 			if (ImGui::OpenPopupOnItemClick("EditGameType", 0))
 			{
 				m_EditGameTypeValue = node;
+				m_bSingle = m_EditGameTypeChooser.MatchType(eGameIDSingle);
+				m_bDM = m_EditGameTypeChooser.MatchType(eGameIDDeathmatch);
+				m_bTDM = m_EditGameTypeChooser.MatchType(eGameIDTeamDeathmatch);
+				m_bAH = m_EditGameTypeChooser.MatchType(eGameIDArtefactHunt);
+				m_bCTA = m_EditGameTypeChooser.MatchType(eGameIDCaptureTheArtefact);
 			}
 			DrawEditGameType();
 		}
