@@ -280,6 +280,15 @@ CCustomObject* ESceneCustomOTool::FindObjectByName(LPCSTR name, CCustomObject* p
     {
     	CCustomObject* CO = (*_I);
     	LPCSTR _name = CO->GetName();
+
+        if (!_name || _name == "" || _name == " ")
+        {
+            Msg("!!! Error _name = %s, %s, %s", Scene->GetOTool(CO->FClassID)->ClassName(), CO->GetName(), CO->FName);
+            Msg("!!! Try FIX name");
+            CO->SetName(Scene->GetOTool(CO->FClassID)->ClassName());
+            _name = CO->GetName();
+        }
+
         R_ASSERT	(_name);
     	if((pass!=*_I) && (0==strcmp(_name,name)) ) 
         	return (*_I);
