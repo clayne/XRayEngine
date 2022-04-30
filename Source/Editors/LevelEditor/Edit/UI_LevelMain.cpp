@@ -376,6 +376,15 @@ CCommandVar CommandImportCompilerError(CCommandVar p1, CCommandVar p2)
     UI->RedrawScene		();
     return TRUE;
 }
+CCommandVar CommandImportXrAICompilerError(CCommandVar p1, CCommandVar p2)
+{
+    xr_string fn;
+    if (EFS.GetOpenName(EDevice.m_hWnd, "$app_root$", fn, false, NULL, 0)) {
+        Scene->LoadXrAICompilerError(fn.c_str());
+    }
+    UI->RedrawScene();
+    return TRUE;
+}
 CCommandVar CommandExportCompilerError(CCommandVar p1, CCommandVar p2)
 {
     xr_string fn;
@@ -902,6 +911,7 @@ void CLevelMain::RegisterCommands()
 	REGISTER_CMD_SE	    (COMMAND_LOAD_FIRSTRECENT,          "File\\Load First Recent",		CommandLoadFirstRecent, true);
 	REGISTER_CMD_S	    (COMMAND_CLEAR_DEBUG_DRAW, 		    CommandClearDebugDraw);
 	REGISTER_CMD_S	    (COMMAND_IMPORT_COMPILER_ERROR,     CommandImportCompilerError);
+    REGISTER_CMD_S      (COMMAND_IMPORT_AICOMPILER_ERROR,   CommandImportXrAICompilerError);
 	REGISTER_CMD_S	    (COMMAND_EXPORT_COMPILER_ERROR,     CommandExportCompilerError);
 	REGISTER_CMD_S	    (COMMAND_VALIDATE_SCENE,            CommandValidateScene);
 	REGISTER_CMD_S	    (COMMAND_CLEAN_LIBRARY,           	CommandCleanLibrary);
