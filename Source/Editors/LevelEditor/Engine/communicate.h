@@ -4,7 +4,7 @@
 #ifdef _EDITOR
 	#include "xrLevel.h"
 #else
-	#include "../../BearBundle/BearGraphics/BearGraphics.hpp"
+	#include "RedImageTool/RedImage.hpp"
 	#include "../../xrEngine/xrLevel.h"
 #endif
 
@@ -61,7 +61,7 @@ struct b_texture
 	u32					dwHeight;
 	BOOL				bHasAlpha;
 #ifndef _EDITOR
-	BearImage				pSurface;
+	RedImageTool::RedImage	pSurface;
 #endif
 };
 

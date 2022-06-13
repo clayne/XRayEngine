@@ -66,14 +66,8 @@
     <ClInclude Include="tVector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BearBundle\BearCore\Platform\Desktop\BearCore.vcxproj">
-      <Project>{86b65138-c85e-4c26-967b-9a21eb954216}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BearBundle\BearGraphics\Platform\Desktop\BearGraphics.vcxproj">
-      <Project>{3b75536d-008d-4495-9fe8-c7ae79ac6898}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BearBundle\External\nvtt\nvtt.vcxproj">
-      <Project>{32a26599-1a59-4866-8c03-1ea6e790405a}</Project>
+    <ProjectReference Include="..\..\External\RedImage\RedImageTool\RedImageTool.vcxproj">
+      <Project>{416e323e-3a4b-41a7-b0f5-7a8ec8517b11}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\XrCore\XrCore.vcxproj">
       <Project>{da642d7c-4fff-43dc-98f8-3f96caf1e4ba}</Project>
@@ -256,6 +250,7 @@
       <PreprocessorDefinitions>DEBUG;XRDXT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\SDK\Include;$(SolutionDir)XrRender\Public;$(SolutionDir)External\Public;$(SolutionDir)External\RedImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
