@@ -23,6 +23,8 @@ public:
 	void Initialize(HWND hWnd, IDirect3DDevice9* device,const char*ini_path);
 	void Destroy();
 
+	void Style();
+
 	void ResetBegin();
 	void ResetEnd();
 	virtual bool 	ApplyShortCut(DWORD Key, TShiftState Shift)=0;
