@@ -73,6 +73,19 @@ void UIObjectList::Draw()
 				m_SelectedObject->Show(false);
 			}
 		}
+		ImGui::Separator();
+		if (ImGui::Button("Focus on Selected", ImVec2(-1, 0)))
+		{
+			if (m_SelectedObject)
+			{
+				m_SelectedObject->Select(true);
+
+				Fbox bb;
+				if (m_SelectedObject->GetBox(bb))
+					EDevice.m_Camera.ZoomExtents(bb);
+			}
+		}
+
 	}
 	ImGui::EndChild();
 
