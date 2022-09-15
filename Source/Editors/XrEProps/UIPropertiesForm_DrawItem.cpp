@@ -426,115 +426,155 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 		}
 	}
 	break;
-	
-		case PROP_CTEXT:
+
+	case PROP_CTEXT:
+	{
+		CTextValue* V = dynamic_cast<CTextValue*>(node->GetFrontValue()); R_ASSERT(V);
 		{
-			CTextValue* V = dynamic_cast<CTextValue*>(node->GetFrontValue()); R_ASSERT(V);
+			char text[20];
+			xr_string str = node->GetDrawText();
+			int i = 0;
+			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
 			{
-				char text[20];
-				xr_string str = node->GetDrawText();
-				int i = 0;
-				for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
-				{
-					if (str[a] == '\n')
-						a++;
-					if (str[a] == '\t')
-						a++;
-					if (str[a] == '\r')
-						a++;
-					text[i] = str[a];
-				}
-				if(str.size()>16||str.size()==0)
+				if (str[a] == '\n')
+					a++;
+				if (str[a] == '\t')
+					a++;
+				if (str[a] == '\r')
+					a++;
+				text[i] = str[a];
+			}
+			if (str.size() > 16 || str.size() == 0)
 				for (; i < std::min(size_t(16), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
-				text[i] = 0;
-				ImGui::Text(text);
-			}
-			if (ImGui::OpenPopupOnItemClick("EditText", 0))
-			{
-				if (m_EditTextValueData)xr_delete(m_EditTextValueData);
-				m_EditTextValueData = xr_strdup(V->GetValue());
-				m_EditTextValueDataSize = xr_strlen(m_EditTextValueData)+1;
-				m_EditTextValue = node;
-			}
-			DrawEditText();
+			text[i] = 0;
+			ImGui::Text(text);
 		}
-			break;
-		case PROP_RTEXT:
+		if (ImGui::OpenPopupOnItemClick("EditText", 0))
 		{
-			RTextValue* V = dynamic_cast<RTextValue*>(node->GetFrontValue()); R_ASSERT(V);
+			if (m_EditTextValueData)xr_delete(m_EditTextValueData);
+			m_EditTextValueData = xr_strdup(V->GetValue());
+			m_EditTextValueDataSize = xr_strlen(m_EditTextValueData) + 1;
+			m_EditTextValue = node;
+		}
+		DrawEditText();
+	}
+	break;
+	case PROP_RTEXT:
+	{
+		RTextValue* V = dynamic_cast<RTextValue*>(node->GetFrontValue()); R_ASSERT(V);
+		{
+			char text[20];
+			xr_string str = node->GetDrawText();
+			int i = 0;
+			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
 			{
-				char text[20];
-				xr_string str = node->GetDrawText();
-				int i = 0;
-				for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
-				{
-					if (str[a] == '\n')
-						a++;
-					if (str[a] == '\t')
-						a++;
-					if (str[a] == '\r')
-						a++;
-					text[i] = str[a];
-				}
-				if (str.size() > 16 || str.size() == 0)
+				if (str[a] == '\n')
+					a++;
+				if (str[a] == '\t')
+					a++;
+				if (str[a] == '\r')
+					a++;
+				text[i] = str[a];
+			}
+			if (str.size() > 16 || str.size() == 0)
 				for (; i < std::min(size_t(16), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
-				text[i] = 0;
-				ImGui::Text(text);
-			}
-			if (ImGui::OpenPopupOnItemClick("EditText", 0))
-			{
-				if (m_EditTextValueData)xr_delete(m_EditTextValueData);
-				m_EditTextValueData = xr_strdup(V->GetValue().c_str()? V->GetValue().c_str():"");
-				m_EditTextValueDataSize = xr_strlen(m_EditTextValueData) + 1;
-				m_EditTextValue = node;
-			}
-			DrawEditText();
+			text[i] = 0;
+			ImGui::Text(text);
 		}
-			break;
-		
-		case PROP_STEXT:
+		if (ImGui::OpenPopupOnItemClick("EditText", 0))
 		{
-			STextValue* V = dynamic_cast<STextValue*>(node->GetFrontValue()); R_ASSERT(V);
+			if (m_EditTextValueData)xr_delete(m_EditTextValueData);
+			m_EditTextValueData = xr_strdup(V->GetValue().c_str() ? V->GetValue().c_str() : "");
+			m_EditTextValueDataSize = xr_strlen(m_EditTextValueData) + 1;
+			m_EditTextValue = node;
+		}
+		DrawEditText();
+	}
+	break;
+
+	case PROP_STEXT:
+	{
+		STextValue* V = dynamic_cast<STextValue*>(node->GetFrontValue()); R_ASSERT(V);
+		{
+			char text[20];
+			xr_string str = node->GetDrawText();
+			int i = 0;
+			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
 			{
-				char text[20];
-				xr_string str = node->GetDrawText();
-				int i = 0;
-				for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
-				{
-					if (str[a] == '\n')
-						a++;
-					if (str[a] == '\t')
-						a++;
-					if (str[a] == '\r')
-						a++;
-					text[i] = str[a];
-				}
-				if (str.size() > 16 || str.size() == 0)
+				if (str[a] == '\n')
+					a++;
+				if (str[a] == '\t')
+					a++;
+				if (str[a] == '\r')
+					a++;
+				text[i] = str[a];
+			}
+			if (str.size() > 16 || str.size() == 0)
 				for (; i < std::min(size_t(16), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
-				text[i] = 0;
-				ImGui::Text(text);
-			}
-			if (ImGui::OpenPopupOnItemClick("EditText", 0))
-			{
-				if (m_EditTextValueData)xr_delete(m_EditTextValueData);
-				m_EditTextValueData = xr_strdup(V->GetValue().c_str());
-				m_EditTextValueDataSize = xr_strlen(m_EditTextValueData) + 1;
-				m_EditTextValue = node;
-			}
-			DrawEditText();
+			text[i] = 0;
+			ImGui::Text(text);
 		}
-			break;
-			/*case PROP_TIME:
-			break;*/
+		if (ImGui::OpenPopupOnItemClick("EditText", 0))
+		{
+			if (m_EditTextValueData)xr_delete(m_EditTextValueData);
+			m_EditTextValueData = xr_strdup(V->GetValue().c_str());
+			m_EditTextValueDataSize = xr_strlen(m_EditTextValueData) + 1;
+			m_EditTextValue = node;
+		}
+		DrawEditText();
+	}
+	break;
+
+	case PROP_TIME:
+	{
+			FloatValue* V = dynamic_cast<FloatValue*>(node->GetFrontValue()); R_ASSERT(V);
+			{
+				float edit_val = V->GetValue();
+				node->BeforeEdit<FloatValue, float>(edit_val);
+
+				xr_string buf = "";
+				int h = 0, m = 0, s = 0, ms;
+				xr_string t;
+				h = iFloor(edit_val / 3600);
+				t.sprintf("%02d", h); buf += t;
+				m = iFloor((edit_val - h * 3600) / 60);
+				t.sprintf("%02d", m); buf += buf.empty() ? t : ":" + t;
+				s = iFloor(edit_val - h * 3600 - m * 60);
+				t.sprintf("%02d", s); buf += buf.empty() ? t : ":" + t;
+				ms = iFloor((edit_val - h * 3600 - m * 60 - s) * 1000.f);
+
+				if (ImGui::InputText(buf.c_str(), (char*)buf.c_str(), sizeof(buf), ImGuiInputTextFlags_CharsDecimal))
+				{
+					float t[4] = { 0.f,0.f,0.f,0.f };
+					char* pch = strtok((char*)buf.c_str(), ":");
+					int count = 0;
+					while (pch != NULL)
+					{
+						t[count] = atof(pch);
+						count++;
+						pch = strtok(NULL, ":");
+					}
+					edit_val = t[0] * 3600 + t[1] * 60 + t[2];
+
+					if (!ImGui::IsItemActive()) {
+						node->AfterEdit<FloatValue, float>(edit_val);
+						node->ApplyValue<FloatValue, float>(edit_val);
+						Modified();
+					}
+				}
+				
+			}
+	}
+	break;
 		
 		
 		case PROP_GAMETYPE:
