@@ -93,8 +93,7 @@ void UIRenderForm::Draw()
 				m_shiftstate_down = false;
 			}
 		}
-		m_mouse_position.set(mouse_pos.x - canvas_pos.x, mouse_pos.y - canvas_pos.y);
-
+		m_mouse_position.set((mouse_pos.x - canvas_pos.x) * EDevice.m_ScreenQuality, (mouse_pos.y - canvas_pos.y) * EDevice.m_ScreenQuality);
 
 		if (canvas_size.x < 32.0f) canvas_size.x = 32.0f;
 		if (canvas_size.y < 32.0f) canvas_size.y = 32.0f;
