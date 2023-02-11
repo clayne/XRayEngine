@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../../BearBundle/External/Public/Zlib/zlib.h"
+#include "../../External/Public/Zlib/zlib.h"
 void compress( LPCSTR f_in, LPCSTR f_out );
 void decompress( LPCSTR f_in, LPCSTR f_out );
 
