@@ -78,7 +78,12 @@ bool UIChooseForm::IsDrawFloder(Node*node)
 void UIChooseForm::AppendItem(SChooseItem& item)
 {
    Node*node =  AppendObject(&m_GeneralNode, item.name.c_str());
-   VERIFY(node);
+   if (!(node))
+   {
+       Msg("! bad item [%s] found", item.name.c_str());
+       return;
+   }
+
    node->Object = &item;
 }
 void UIChooseForm::UpdateTexture()

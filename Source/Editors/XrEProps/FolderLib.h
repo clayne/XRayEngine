@@ -143,7 +143,7 @@ public:
 
 		for (Node& node : N->Nodes)
 		{
-			if (node.Name == path)
+			if (node.Name == path && node.IsFloder())
 			{
 				if constexpr (FloderAsItem)
 				{
