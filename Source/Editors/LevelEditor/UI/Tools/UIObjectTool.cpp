@@ -142,7 +142,7 @@ void UIObjectTool::Draw()
     if (ImGui::TreeNode("Object List"))
     {
         ImGui::Unindent(ImGui::GetTreeNodeToLabelSpacing());
-        ImGui::BeginChild("Object List");
+        ImGui::BeginChild("Object List", ImVec2(0, 225));
         ImGui::Separator();
         m_ObjectList->Draw();
         ImGui::Separator();
