@@ -19,6 +19,7 @@ public:
 		plReadOnly = (1 << 0),
 	};
 	Flags32 m_Flags;
+	void SetFocusOnMe();
 private:
 	virtual void DrawItem(Node* Node);
 	virtual void DrawItem(const char*name,PropItem* Node);

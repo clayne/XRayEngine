@@ -305,6 +305,10 @@ void CLevelTool::RealUpdateProperties()
 
 		m_Props->AssignItems		(items);
     }
+
+    if (!m_Props->IsClosed())
+        m_Props->SetFocusOnMe();
+
 	m_Flags.set(flUpdateProperties,FALSE);
     m_Props->setModified(FALSE);
 }

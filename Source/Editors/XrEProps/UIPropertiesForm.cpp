@@ -636,3 +636,7 @@ void UIPropertiesForm::DrawEditGameType()
 	}
 }
 
+void UIPropertiesForm::SetFocusOnMe()
+{
+	ImGui::SetWindowFocus();
+}
