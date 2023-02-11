@@ -431,10 +431,10 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 	{
 		CTextValue* V = dynamic_cast<CTextValue*>(node->GetFrontValue()); R_ASSERT(V);
 		{
-			char text[20];
+			char text[40];
 			xr_string str = node->GetDrawText();
 			int i = 0;
-			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
+			for (int a = 0; i < std::min(size_t(36), str.size()); i++, a++)
 			{
 				if (str[a] == '\n')
 					a++;
@@ -444,8 +444,8 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 					a++;
 				text[i] = str[a];
 			}
-			if (str.size() > 16 || str.size() == 0)
-				for (; i < std::min(size_t(16), str.size()) + 3; i++)
+			if (str.size() > 36 || str.size() == 0)
+				for (; i < std::min(size_t(36), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
@@ -466,10 +466,10 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 	{
 		RTextValue* V = dynamic_cast<RTextValue*>(node->GetFrontValue()); R_ASSERT(V);
 		{
-			char text[20];
+			char text[40];
 			xr_string str = node->GetDrawText();
 			int i = 0;
-			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
+			for (int a = 0; i < std::min(size_t(36), str.size()); i++, a++)
 			{
 				if (str[a] == '\n')
 					a++;
@@ -479,8 +479,8 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 					a++;
 				text[i] = str[a];
 			}
-			if (str.size() > 16 || str.size() == 0)
-				for (; i < std::min(size_t(16), str.size()) + 3; i++)
+			if (str.size() > 36 || str.size() == 0)
+				for (; i < std::min(size_t(36), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
@@ -502,10 +502,10 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 	{
 		STextValue* V = dynamic_cast<STextValue*>(node->GetFrontValue()); R_ASSERT(V);
 		{
-			char text[20];
+			char text[40];
 			xr_string str = node->GetDrawText();
 			int i = 0;
-			for (int a = 0; i < std::min(size_t(16), str.size()); i++, a++)
+			for (int a = 0; i < std::min(size_t(36), str.size()); i++, a++)
 			{
 				if (str[a] == '\n')
 					a++;
@@ -515,8 +515,8 @@ void UIPropertiesForm::DrawItem(const char* name, PropItem* node)
 					a++;
 				text[i] = str[a];
 			}
-			if (str.size() > 16 || str.size() == 0)
-				for (; i < std::min(size_t(16), str.size()) + 3; i++)
+			if (str.size() > 36 || str.size() == 0)
+				for (; i < std::min(size_t(36), str.size()) + 3; i++)
 				{
 					text[i] = '.';
 				}
