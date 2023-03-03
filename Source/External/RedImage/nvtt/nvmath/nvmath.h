@@ -139,7 +139,7 @@ inline float asinf_assert(const float f)
 #endif
 
 #if NV_CC_MSVC
-NV_FORCEINLINE float log2f(float x)
+NV_FORCEINLINE float logbf(float x)
 {
     nvCheck(x >= 0);
     return logf(x) / logf(2.0f);
