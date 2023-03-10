@@ -91,6 +91,22 @@ bool UIItemListForm::GetSelected(RStringVec& items) const
 	return false;
 }
 
+int UIItemListForm::GetSelected(LPCSTR pref, ListItemsVec& items, bool bOnlyObject)
+{
+	if (m_SelectedItem)
+	{
+			xr_string key = *(m_SelectedItem->Object->Key());
+			if (pref)
+			{
+				if (0 == key.find(pref))
+					items.push_back(m_SelectedItem->Object);
+			}
+			else
+				items.push_back(m_SelectedItem->Object);
+	}
+	return items.size();
+}
+
 void UIItemListForm::UpdateSelected(UIItemListFormItem* NewSelected)
 {
 	m_SelectedItem = NewSelected;
