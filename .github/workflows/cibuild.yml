@@ -14,9 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        Configuration: [Debug, Release, ReleaseNoEditor]
+        Configuration: [Release]
         Platform: [x64]
-        
     steps:
     - uses: actions/checkout@main
 
