@@ -1,23 +1,7 @@
-if "%CONFIGURATION%"=="Debug" (
-    if %PLATFORM%==x64 (
-        set PLATFORM_FOLDER=Win64
-        set EDITION_NAME=Debug 64-bit
-        goto :START
-    )
-)
-
 if "%CONFIGURATION%"=="Release" (
     if %PLATFORM%==x64 (
         set PLATFORM_FOLDER=Win64
         set EDITION_NAME=Release 64-bit
-        goto :START
-    )
-)
-
-if "%CONFIGURATION%"=="ReleaseNoEditor" (
-    if %PLATFORM%==x64 (
-        set PLATFORM_FOLDER=Win64
-        set EDITION_NAME=ReleaseNoEditor 64-bit
         goto :START
     )
 )
@@ -47,8 +31,6 @@ goto :EOF
 copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.dll" res\bin\
 copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.exe" res\bin\
 copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.pdb" res\bin\
-copy gamedata/ res\
-copy rawdata/ res\
 
 copy License.txt res\
 copy fs.ltx res\
