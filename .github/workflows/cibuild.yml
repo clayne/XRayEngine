@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        Configuration: [Release]
+        Configuration: [Debug]
         Platform: [x64]
     steps:
     - uses: actions/checkout@main
@@ -27,12 +27,12 @@ jobs:
       run: nuget restore Source\Engine.sln
 
     - name: Build
-      working-directory: src
+      working-directory: Source
       run: msbuild /m /p:Configuration="${{ matrix.Configuration }}" /p:Platform="${{ matrix.Platform }}" Engine.sln
 
     - name: Prepare artifacts
       shell: cmd
-      run: misc/windows/xr_pack_build.cmd "${{ matrix.Configuration }}" "${{ matrix.Platform }}"
+      run: xr_pack_build.cmd "${{ matrix.Configuration }}" "${{ matrix.Platform }}"
 
     - name: Upload HybridXRay artifact
       uses: actions/upload-artifact@main
