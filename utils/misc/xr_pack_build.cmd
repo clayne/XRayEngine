@@ -1,3 +1,4 @@
+@echo off
 
 if [%1]==[] (
   echo Please, specify configuration
@@ -24,6 +25,9 @@ set EDITION_NAME=%EDITION_NAME: =.%
 @echo on
 
 md Bin\
+md gamedata\
+md rawdata\
+md utils\
 
 rem Prepare files
 copy "Bin\%PLATFORM%\%CONFIGURATION%\*.dll" res\Bin\
