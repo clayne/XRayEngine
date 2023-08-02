@@ -27,7 +27,7 @@ jobs:
       run: nuget restore Source\Engine.sln
 
     - name: Build
-      working-directory: Source
+      working-directory: src
       run: msbuild /m /p:Configuration="${{ matrix.Configuration }}" /p:Platform="${{ matrix.Platform }}" Engine.sln
 
     - name: Prepare artifacts
