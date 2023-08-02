@@ -30,6 +30,10 @@ jobs:
       working-directory: Source
       run: msbuild /m /p:Configuration="${{ matrix.Configuration }}" /p:Platform="${{ matrix.Platform }}" Engine.sln
 
+    - name: Prepare artifacts
+      shell: cmd
+      run: echo xr_pack_build.cmd "${{ matrix.Configuration }}" "${{ matrix.Platform }}"
+
     - name: Upload HybridXRay artifact
       uses: actions/upload-artifact@main
       with:
