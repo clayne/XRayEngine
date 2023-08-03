@@ -24,41 +24,6 @@ set EDITION_NAME=%EDITION_NAME: =.%
 
 @echo on
 
-md utils\Bin\%PLATFORM%\%CONFIGURATION%\
-md utils\gamedata\
-md utils\rawdata\
-md utils\utils\
-
-rem Prepare files
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.dll" utils\Bin\%PLATFORM%\%CONFIGURATION%\
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.exe" utils\Bin\%PLATFORM%\%CONFIGURATION%\
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.pdb" utils\Bin\%PLATFORM%\%CONFIGURATION%\
-xcopy /E gamedata\ utils\gamedata
-xcopy /E rawdata\ utils\rawdata
-copy "utils\oalinst.exe" utils\utils\
-copy License.txt utils\
-
-copy License.txt utils\
-copy fs.ltx utils\
-copy fs_cs.ltx utils\
-copy fs_soc.ltx utils\
-copy fsgame.ltx utils\
-copy fsgame_cs.ltx utils\
-copy fsgame_soc.ltx utils\
-copy tool_compile_xrAI.cmd utils\
-copy tool_compile_xrAI_draft.cmd utils\
-copy tool_compile_xrDO.cmd utils\
-copy tool_compile_xrLC.cmd utils\
-copy tool_create_spawn.cmd utils\
-copy tool_verify_ai_map.cmd utils\
-copy tool_compile_xrAI.cmd utils\
-rem We don't need MFC stuff which Visual Studio automatically copies
-del /q /f /s "utils\Bin\mfc*.dll"
-
-cd utils
-
 rem Make archives
-7z a "HybridXRay.%EDITION_NAME%.7z" Bin -xr!.* gamedata -xr!.* rawdata -xr!.* utils -xr!.* -xr!*.pdb -i!fs.ltx -i!fs_cs.ltx -i!fs_soc.ltx -i!fsgame.ltx -i!fsgame_cs.ltx -i!fsgame_soc.ltx -i!tool_compile_xrAI.cmd -i!tool_compile_xrAI_draft.cmd -i!tool_compile_xrDO.cmd -i!tool_compile_xrLC.cmd -i!tool_create_spawn.cmd -i!tool_verify_ai_map.cmd -i!tool_compile_xrAI.cmd -i!License.cmd
+7z a "HybridXRay.%EDITION_NAME%.7z" Bin\%PLATFORM%\%CONFIGURATION%\*.dll Bin\%PLATFORM%\%CONFIGURATION%\*.exe -r gamedata -xr!.* -r rawdata -xr!.* -i!utils\oalinst.exe -i!fs.ltx -i!fs_cs.ltx -i!fs_soc.ltx -i!fsgame.ltx -i!fsgame_cs.ltx -i!fsgame_soc.ltx -i!tool_compile_xrAI.cmd -i!tool_compile_xrAI_draft.cmd -i!tool_compile_xrDO.cmd -i!tool_compile_xrLC.cmd -i!tool_create_spawn.cmd -i!tool_verify_ai_map.cmd -i!tool_compile_xrAI.cmd -i!License.cmd
 7z a "Symbols.%EDITION_NAME%.7z" Bin\%PLATFORM%\%CONFIGURATION%\*.pdb -i!License.txt -xr!.*
-
-cd ..
