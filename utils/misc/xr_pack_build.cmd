@@ -10,14 +10,14 @@ echo ! Unknown configuration and/or platform
 goto :EOF
 
 :START
-md res\bin\
-md res\gamedata\
-md res\rawdata\
+md Bin\
+md gamedata\
+md rawdata\
 call :COPY_ENGINE
 
-cd res
+cd utils
 7z a "HybridXRay.%EDITION_NAME%.7z" * -xr!.* -xr!*.pdb
-7z a "Symbols.%EDITION_NAME%.7z" bin\*.pdb -i!License.txt -i!README.md -xr!.*
+7z a "Symbols.%EDITION_NAME%.7z" Bin\*.pdb -i!License.txt -xr!.*
 cd ..
 
 rem Return edition name
@@ -28,22 +28,24 @@ if defined NEED_OUTPUT (
 goto :EOF
 
 :COPY_ENGINE
-copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.dll" res\bin\
-copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.exe" res\bin\
-copy "bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.pdb" res\bin\
+copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.dll" utils\Bin\
+copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.exe" utils\Bin\
+copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.pdb" utils\Bin\
+copy "gamedata\*.*" utils\
+copy "rawdata\*.*" utils\
 
-copy License.txt res\
-copy fs.ltx res\
-copy fs_cs.ltx res\
-copy fs_soc.ltx res\
-copy fsgame.ltx res\
-copy fsgame_cs.ltx res\
-copy fsgame_soc.ltx res\
-copy tool_compile_xrAI.cmd res\
-copy tool_compile_xrAI_draft.cmd res\
-copy tool_compile_xrDO.cmd res\
-copy tool_compile_xrLC.cmd res\
-copy tool_create_spawn.cmd res\
-copy tool_verify_ai_map.cmd res\
-copy tool_compile_xrAI.cmd res\
+copy License.txt utils\
+copy fs.ltx utils\
+copy fs_cs.ltx utils\
+copy fs_soc.ltx utils\
+copy fsgame.ltx utils\
+copy fsgame_cs.ltx utils\
+copy fsgame_soc.ltx utils\
+copy tool_compile_xrAI.cmd utils\
+copy tool_compile_xrAI_draft.cmd utils\
+copy tool_compile_xrDO.cmd utils\
+copy tool_compile_xrLC.cmd utils\
+copy tool_create_spawn.cmd utils\
+copy tool_verify_ai_map.cmd utils\
+copy tool_compile_xrAI.cmd utils\
 goto :EOF
