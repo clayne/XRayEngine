@@ -38,13 +38,13 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: HybridXRay.${{ matrix.Configuration }} ${{ matrix.Platform }} (github-${{ github.run_number }}).7z
-        path: utils/HybridXRay.*.7z
+        path: HybridXRay.*.7z
 
     - name: Upload Symbols
       uses: actions/upload-artifact@main
       with:
         name: Symbols.${{ matrix.Configuration }} ${{ matrix.Platform }} (github-${{ github.run_number }}).7z
-        path: utils/Symbols.*.7z
+        path: Symbols.*.7z
 
     - name: Update latest-nightly tag
       uses: EndBug/latest-tag@latest
@@ -57,4 +57,4 @@ jobs:
       if: ${{ steps.update-latest-nightly-tag.outcome == 'success' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: gh release upload --clobber latest-nightly (get-item res/*.*.7z)
+      run: gh release upload --clobber latest-nightly (get-item *.*.7z)
