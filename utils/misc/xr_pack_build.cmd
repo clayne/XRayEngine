@@ -24,18 +24,19 @@ set EDITION_NAME=%EDITION_NAME: =.%
 
 @echo on
 
-md Bin\
-md gamedata\
-md rawdata\
+md utils\Bin\%PLATFORM%\%CONFIGURATION%\
+md utils\gamedata\
+md utils\rawdata\
+md utils\utils\
 
 rem Prepare files
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.dll" utils\Bin\
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.exe" utils\Bin\
-copy "Bin\%PLATFORM%\%CONFIGURATION%\*.pdb" utils\Bin\
-copy "gamedata\*.*" utils\
-copy "rawdata\*.*" utils\
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.dll" utils\Bin\%PLATFORM%\%CONFIGURATION%\
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.exe" utils\Bin\%PLATFORM%\%CONFIGURATION%\
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.pdb" utils\Bin\%PLATFORM%\%CONFIGURATION%\
+xcopy /E gamedata\ utils\gamedata
+xcopy /E rawdata\ utils\rawdata
+copy "utils\oalinst.exe" utils\utils\
 copy License.txt utils\
-copy README.md utils\
 
 copy License.txt utils\
 copy fs.ltx utils\
@@ -57,7 +58,7 @@ del /q /f /s "utils\Bin\mfc*.dll"
 cd utils
 
 rem Make archives
-7z a "HybridXRay.%EDITION_NAME%.7z" bin gamedata rawdata utils -xr!.* -xr!*.pdb -i!fs.ltx -i!fs_cs.ltx -i!fs_soc.ltx -i!fsgame.ltx -i!fsgame_cs.ltx -i!fsgame_soc.ltx -i!tool_compile_xrAI.cmd -i!tool_compile_xrAI_draft.cmd -i!tool_compile_xrDO.cmd -i!tool_compile_xrLC.cmd -i!tool_create_spawn.cmd -i!tool_verify_ai_map.cmd -i!tool_compile_xrAI.cmd -i!License.cmd
-7z a "Symbols.%EDITION_NAME%.7z" bin\*.pdb -i!License.txt -xr!.*
+7z a "HybridXRay.%EDITION_NAME%.7z" Bin -xr!.* gamedata -xr!.* rawdata -xr!.* utils -xr!.* -xr!*.pdb -i!fs.ltx -i!fs_cs.ltx -i!fs_soc.ltx -i!fsgame.ltx -i!fsgame_cs.ltx -i!fsgame_soc.ltx -i!tool_compile_xrAI.cmd -i!tool_compile_xrAI_draft.cmd -i!tool_compile_xrDO.cmd -i!tool_compile_xrLC.cmd -i!tool_create_spawn.cmd -i!tool_verify_ai_map.cmd -i!tool_compile_xrAI.cmd -i!License.cmd
+7z a "Symbols.%EDITION_NAME%.7z" Bin\%PLATFORM%\%CONFIGURATION%\*.pdb -i!License.txt -xr!.*
 
 cd ..
