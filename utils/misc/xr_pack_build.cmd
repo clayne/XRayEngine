@@ -1,38 +1,41 @@
-if "%CONFIGURATION%"=="Debug" (
-    if %PLATFORM%==x64 (
-        set PLATFORM_FOLDER=x64
-        set EDITION_NAME=Debug 64-bit
-        goto :START
-    )
+@echo off
+
+if [%1]==[] (
+  echo Please, specify configuration
+  EXIT /B
 )
 
-echo ! Unknown configuration and/or platform
-goto :EOF
+if [%2]==[] (
+  echo Please, specify platform
+  EXIT /B
+)
 
-:START
+set CONFIGURATION=%~1
+set PLATFORM=%~2
+
+if %PLATFORM%==x64 (
+    set EDITION_NAME=%CONFIGURATION% 64-bit
+) else (
+    set EDITION_NAME=%CONFIGURATION% %PLATFORM%
+)
+
+rem Replace spaces with dots to avoid possible problems (e.g. with GitHub nighly builds uploading)
+set EDITION_NAME=%EDITION_NAME: =.%
+
+@echo on
+
 md Bin\
 md gamedata\
 md rawdata\
-call :COPY_ENGINE
 
-cd utils
-7z a "HybridXRay.%EDITION_NAME%.7z" * -xr!.* -xr!*.pdb
-7z a "Symbols.%EDITION_NAME%.7z" Bin\*.pdb -i!License.txt -xr!.*
-cd ..
-
-rem Return edition name
-set NEED_OUTPUT=%1
-if defined NEED_OUTPUT (
-    set %~1=%EDITION_NAME%
-)
-goto :EOF
-
-:COPY_ENGINE
-copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.dll" utils\Bin\
-copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.exe" utils\Bin\
-copy "Bin\%PLATFORM_FOLDER%\%CONFIGURATION%\*.pdb" utils\Bin\
+rem Prepare files
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.dll" utils\Bin\
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.exe" utils\Bin\
+copy "Bin\%PLATFORM%\%CONFIGURATION%\*.pdb" utils\Bin\
 copy "gamedata\*.*" utils\
 copy "rawdata\*.*" utils\
+copy License.txt utils\
+copy README.md utils\
 
 copy License.txt utils\
 copy fs.ltx utils\
@@ -48,4 +51,13 @@ copy tool_compile_xrLC.cmd utils\
 copy tool_create_spawn.cmd utils\
 copy tool_verify_ai_map.cmd utils\
 copy tool_compile_xrAI.cmd utils\
-goto :EOF
+rem We don't need MFC stuff which Visual Studio automatically copies
+del /q /f /s "utils\Bin\mfc*.dll"
+
+cd utils
+
+rem Make archives
+7z a "HybridXRay.%EDITION_NAME%.7z" bin gamedata rawdata utils -xr!.* -xr!*.pdb -i!fs.ltx -i!fs_cs.ltx -i!fs_soc.ltx -i!fsgame.ltx -i!fsgame_cs.ltx -i!fsgame_soc.ltx -i!tool_compile_xrAI.cmd -i!tool_compile_xrAI_draft.cmd -i!tool_compile_xrDO.cmd -i!tool_compile_xrLC.cmd -i!tool_create_spawn.cmd -i!tool_verify_ai_map.cmd -i!tool_compile_xrAI.cmd -i!License.cmd
+7z a "Symbols.%EDITION_NAME%.7z" bin\*.pdb -i!License.txt -xr!.*
+
+cd ..
