@@ -2,9 +2,9 @@ name: Build Project
 
 on:
   push:
-    branches: [ Renewal_SDK ]
+    branches: [ Renewal_SDK, Renewal_SDK_dev ]
   pull_request:
-    branches: [ Renewal_SDK ]
+    branches: [ Renewal_SDK, Renewal_SDK_dev ]
   workflow_dispatch:
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
 
     - name: Update latest-nightly tag
       uses: EndBug/latest-tag@latest
-      if: github.ref_name == 'Renewal_SDK'
+      if: github.ref_name == '!_test_Build_workflow'
       id: update-latest-nightly-tag
       with:
         ref: latest-nightly
